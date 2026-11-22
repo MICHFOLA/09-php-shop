@@ -12,14 +12,14 @@ $flash = take_flash();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="<?= e(app_url('assets/css/style.css')) ?>">
 </head>
 <body>
 <header class="site-header">
     <div class="header-inner">
-        <a class="brand" href="index.php" aria-label="Soko home">soko<span>.</span></a>
+        <a class="brand" href="<?= e(app_url('index.php')) ?>" aria-label="Soko home">soko<span>.</span></a>
         <p class="header-note">Thoughtful finds for everyday living</p>
-        <a class="cart-link" href="cart.php" aria-label="Shopping bag, <?= $cartCount ?> items">
+        <a class="cart-link" href="<?= e(app_url('cart.php')) ?>" aria-label="Shopping bag, <?= $cartCount ?> items">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Z"></path><path d="M9 9V6a3 3 0 0 1 6 0v3"></path></svg>
             <span>Bag</span>
             <span class="cart-count"><?= $cartCount ?></span>

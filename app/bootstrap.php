@@ -10,6 +10,16 @@ function e(mixed $value): string
     return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
+function app_url(string $path = ''): string
+{
+    $scriptDirectory = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+    if (basename($scriptDirectory) === 'admin') {
+        $scriptDirectory = dirname($scriptDirectory);
+    }
+
+    return rtrim($scriptDirectory, '/') . '/' . ltrim($path, '/');
+}
+
 function money(int|float|string $amount): string
 {
     return '₦' . number_format((float) $amount, 2);
