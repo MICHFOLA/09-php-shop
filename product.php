@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 require __DIR__ . '/app/bootstrap.php';
+require __DIR__ . '/app/cart.php';
 
 $slug = isset($_GET['slug']) && is_string($_GET['slug']) ? trim($_GET['slug']) : '';
 $statement = $pdo->prepare(
@@ -37,17 +38,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $quantityInput = $_POST['quantity'] ?? '';
     $quantity = filter_var($quantityInput, FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
-    if ($quantity === false || $quantity > (int) $product['stock']) {
-        set_flash('error', 'Choose a quantity available in stock.');
+    if ($quantity === false) {
+        set_flash('error', 'Choose a valid quantity.');
     } else {
-        $cart = $_SESSION['cart'] ?? [];
-        $currentQuantity = (int) ($cart[$product['id']] ?? 0);
-        if ($currentQuantity + $quantity > (int) $product['stock']) {
-            set_flash('error', 'There are not enough items in stock for that quantity.');
-        } else {
-            $cart[$product['id']] = $currentQuantity + $quantity;
-            $_SESSION['cart'] = $cart;
-            set_flash('success', $product['name'] . ' added to your bag.');
+        try {
+            $adjusted = cart_add((int) $product['id'], $quantity);
+            set_flash(
+                'success',
+                $adjusted
+                    ? 'Your bag was updated to the available stock quantity.'
+                    : $product['name'] . ' added to your bag.'
+            );
+        } catch (DomainException $exception) {
+            set_flash('error', $exception->getMessage());
         }
     }
 

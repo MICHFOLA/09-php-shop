@@ -19,7 +19,7 @@ $flash = take_flash();
     <div class="header-inner">
         <a class="brand" href="index.php" aria-label="Soko home">soko<span>.</span></a>
         <p class="header-note">Thoughtful finds for everyday living</p>
-        <a class="cart-link" href="index.php#products" aria-label="Shopping bag, <?= $cartCount ?> items">
+        <a class="cart-link" href="cart.php" aria-label="Shopping bag, <?= $cartCount ?> items">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Z"></path><path d="M9 9V6a3 3 0 0 1 6 0v3"></path></svg>
             <span>Bag</span>
             <span class="cart-count"><?= $cartCount ?></span>
