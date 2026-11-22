@@ -121,8 +121,7 @@ require __DIR__ . '/partials/header.php';
                     <strong><?= e(money($total)) ?></strong>
                 </div>
                 <p class="summary-note">Shipping and any applicable fees are calculated at checkout.</p>
-                <button class="button checkout-button" type="button" disabled>Proceed to checkout</button>
-                <p class="checkout-note">Checkout isn't available yet.</p>
+                <a class="button checkout-button" href="checkout.php">Proceed to checkout</a>
             </aside>
         </div>
     <?php endif; ?>
