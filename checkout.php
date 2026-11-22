@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         strlen($values['phone']) < 7
         || strlen($values['phone']) > 20
         || preg_match('/^[0-9+().\-\s]+$/', $values['phone']) !== 1
+        || preg_match_all('/[0-9]/', $values['phone']) < 7
     ) {
         $errors['phone'] = 'Enter a valid phone number, including its country code if needed.';
     }
